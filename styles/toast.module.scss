@@ -1,0 +1,38 @@
+.toast{
+    color: #EEEEEE;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #232020;
+    bottom: 10px;
+    padding: 20px 40px;
+    text-align: center;
+    font-size: 14px;
+    border-left: 2px solid #5fbaf7;
+    animation: OpacityIn 200ms ease-in forwards;
+    
+    
+}
+
+.toast.error{
+    border-left: 2px solid tomato;
+
+}
+
+.toast.success{
+    border-left: 2px solid palegreen;
+}
+
+.times{
+    color: #EEEEEE;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@keyframes OpacityIn {
+    from {opacity: 0}
+    to {opacity: 1}
+}

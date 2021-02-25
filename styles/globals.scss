@@ -1,0 +1,55 @@
+/* Colours
+
+purple : #52057b
+purple-light : #892cdc;
+black : #000
+darkgrey : #222831
+lightgrey : #EEEEEE
+goldyellow : #ffd369
+orange : #ff7315
+near-black : #232020
+blue : #5fbaf7
+
+
+
+
+font-family: 'Open Sans', sans-serif;
+font-family: 'Permanent Marker', cursive;
+
+*/
+
+
+
+
+html,
+body {
+  background-color: #222831;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif; 
+ 
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button{
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+ul{
+  list-style: none;
+}
+

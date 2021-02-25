@@ -1,0 +1,9 @@
+const ACTIONS = {
+    SIGNIN : "SIGNIN",
+    UPDATE_MESSAGE : 'UPDATE_MESSAGE',
+    REGISTER : "REGISTER",
+    CLEAR_MESSAGE: 'CLEAR_MESSAGE'
+}
+
+
+export default ACTIONS

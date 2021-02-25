@@ -1,0 +1,64 @@
+
+
+.signin{
+    color: black;
+    display: flex;
+    height: calc(100vh - 100px);
+    padding: 40px 0;
+}
+
+.auth__form{
+    padding: 20px;
+    margin: auto;
+    width: calc(min(400px, 100vw));
+    background-color: #EEEEEE;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 420px) {
+        padding: 5px;
+        margin: auto 8px;
+    }
+    
+
+    label{
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+    
+    input{
+        margin-bottom: 26px;
+        outline: none;
+        min-height: 1.6rem;
+        padding: 10px;
+
+    }
+    h3{
+        font-family: 'Permanent Marker', cursive;
+        color: black;
+        font-size: 28px;
+        margin-bottom: 26px;
+    }
+
+    p{
+        font-size: 12px;
+        margin-bottom: 26px;
+
+        a{
+            color: #5fbaf7;
+           
+        }
+    }
+    
+}
+
+.submit__form{
+    display: block;
+    color: white;
+    background-color: #5fbaf7;
+    margin-bottom: 28px;
+    padding: 10px;
+    font-size: 16px;
+    display: grid;
+    place-content: center;
+}

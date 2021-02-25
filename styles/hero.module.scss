@@ -1,0 +1,156 @@
+.hero{
+    height: calc(100vh - 100px);
+    overflow-x: none;
+    max-width: 100%;
+    min-height: 740px;
+    display: grid;
+    grid-template-areas: 
+    "feature__one feature__one feature__two feature__two secondary__one"
+    "feature__one feature__one feature__two feature__two secondary__one"
+    "feature__one feature__one feature__two feature__two secondary__two"
+    "feature__one feature__one feature__two feature__two secondary__two"
+    "feature__one feature__one feature__two feature__two secondary__three"
+    "feature__one feature__one feature__two feature__two secondary__three"
+    "feature__one feature__one feature__two feature__two secondary__three";
+    
+    div{
+ 
+        border: 2px solid black;
+        transition: filter 200ms ease-in;
+        z-index: 1;
+        position: relative;
+
+        &:hover > button{
+            opacity: 1;
+        }
+        
+    }
+
+
+    @media screen and (max-width:1000px) {
+        grid-template-areas: 
+        "feature__one feature__one feature__one feature__two feature__two feature__two"
+        "feature__one feature__one feature__one feature__two feature__two feature__two"
+        "feature__one feature__one feature__one feature__two feature__two feature__two"
+        "feature__one feature__one feature__one feature__two feature__two feature__two"
+        "secondary__one secondary__one secondary__two secondary__two secondary__three secondary__three"
+        "secondary__one secondary__one secondary__two secondary__two secondary__three secondary__three"
+    }
+
+    @media screen and (max-width:550px){
+        min-height: 1400px;
+        grid-template-areas: 
+        "secondary__one"
+        "feature__two"
+        "feature__one"
+        "secondary__two"
+        "secondary__three"
+    }
+}
+
+.shop__btn{
+    transition: 300ms ease-in;
+    padding: 10px;
+    opacity: 0;
+    font-family: 'Permanent Marker', cursive;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    letter-spacing: 2px;
+    font-size: 18px;
+    min-width: 100%;
+    
+}
+
+.feature__one{
+    grid-area: feature__one;
+
+    &:hover::before{
+        filter: grayscale(50%) blur(1px);
+    }
+
+}
+
+.feature__one::before{
+    background: url('../public/static/images/converse.jpeg') no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+
+.feature__two{
+    grid-area: feature__two;
+
+    &:hover::before{
+        filter: grayscale(50%) blur(1px);
+    }
+    
+}
+
+.feature__two::before{
+    background: url('../public/static/images/nike.jpg') no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+
+.secondary__one{
+    grid-area: secondary__one;
+    &:hover::before{
+        filter: grayscale(50%) blur(1px);
+    }
+}
+
+.secondary__one::before{
+    background: url('../public/static/images/vans.jpg') no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+
+.secondary__two{
+    grid-area: secondary__two;
+    &:hover::before{
+        filter: grayscale(50%) blur(1px);
+    }
+}
+
+.secondary__two::before{
+    background: url('../public/static/images/training.jpg') no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    z-index: 1;
+    filter: grayscale(100%);
+}
+
+.secondary__three{
+    grid-area: secondary__three;
+    &:hover::before{
+        filter: grayscale(50%) blur(1px);
+    }
+}
+
+.secondary__three::before{
+    background: url('../public/static/images/vintage.jpeg') no-repeat center center/cover;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    content: '';
+    z-index: 1;
+    filter: grayscale(100%);
+}
