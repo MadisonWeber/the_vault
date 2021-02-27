@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 
 const SignIn = () => {
 
-    const { state, dispatch } = useContext(GlobalState)
+    const { dispatch } = useContext(GlobalState)
 
     const router = useRouter()
 

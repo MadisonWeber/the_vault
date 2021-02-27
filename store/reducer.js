@@ -10,6 +10,8 @@ const reducer = (state, action) => {
             return {...state, message : { text : '', category : ''}}
         case ACTIONS.REGISTER:
             return { ...state, user : action.payload.user, message : action.payload.message}
+        case ACTIONS.LOGOUT:
+            return { ...state, user : {}, cart : {}, message : { text : 'User Logged Out', category : 'info'}}
         default:
             return state
     }

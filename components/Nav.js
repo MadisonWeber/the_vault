@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { GlobalState } from '../store/GlobalState'
 import Link from 'next/link'
 import styles from '../styles/nav.module.scss'
+import Profile from '../components/Profile'
 
 const Nav = () => {
 
@@ -15,7 +16,7 @@ const Nav = () => {
                 <Link href = "/products"><li>Products</li></Link>
                 <Link href = "/about"><li>About</li></Link>
                 <Link href = "/cart" ><li>Cart</li></Link>
-                {user.name ?  <Link href = "/profile"><li>Profile</li></Link> : <Link href = "/signin"><li>Sign In</li></Link>}
+                {user.name ?  <Profile /> : <Link href = "/signin"><li>Sign In</li></Link>}
             </ul>
         </nav>
     )

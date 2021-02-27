@@ -6,7 +6,7 @@ export const GlobalState = createContext()
 
 const GlobalStateProvider = ({children}) => {
 
-    const initialState = { user : {}, message : { catgeory : '', text : ''}}
+    const initialState = { user : {}, message : { catgeory : '', text : ''}, cart : {}}
 
     const [state, dispatch ] = useReducer(reducer, initialState)
 

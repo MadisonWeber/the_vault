@@ -1,0 +1,37 @@
+.cart{
+    color: black;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+
+    h1{
+        font-family: 'Permanent Marker', cursive;
+        font-size: 60px;
+        text-decoration: underline #5fbaf7;
+    }
+
+}
+
+.noUser{
+    height: 400px;
+    border: 2px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p{
+       
+        font-size: 20px;
+
+        &::first-letter{
+            font-weight: 700;
+            font-size: 32px;
+        }
+
+        a{
+            color: #5fbaf7;
+            text-decoration: underline;
+        }
+    }
+}
