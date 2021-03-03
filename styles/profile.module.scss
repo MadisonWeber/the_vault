@@ -7,8 +7,9 @@
     margin: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
     line-height: 1;
+    justify-content: center;
+    
 
     i{
         margin-left: 5px;
@@ -20,29 +21,28 @@
 }
 
 .info{
-    height: 120px;
-    width: 300px;
-    background-color: white;
+    width: 260px;
+    background-color: rgb(255, 255, 255);
     position: absolute;
     right: 20px;
     top: 90px;
-    border-radius: 8px;
     text-align: center;
     display: flex;
     flex-direction: column;
-    background-color: rgba(143, 143, 143, 0.95);
-    justify-content: space-around;
     padding: 10px;
-    font-size: 14px;
     z-index: 1000;
+    box-shadow: 1px 1px 4px 4px rgba(53, 48, 48, .1);
+    padding-top: 20px;
+   
     
     
     p{
-        
+        font-size: 15px;
         font-family: 'Open Sans', sans-serif;
-        color : #ffd369;
+        margin-bottom: 5px;
+        color: black;
         span{
-            color: white;
+      
             font-weight: 700;
         }
     }
@@ -56,16 +56,29 @@
     }
 
     button{
-        background-color: #232020;
-        color: white;
-        display: inline-block;
-        padding: 5px 10px;
+      
+        display: block;
+        width: 95%;
+        padding: 10px 0px;
         align-self: center;
+        margin-bottom: 5px;
+        font-weight: 700;
+        font-style: italic;
 
         &:hover{
-            transform: scale(1.03);
+            filter: brightness(90%);
         }
        
-    
     }
+}
+
+.orders{
+    background-color: #ffd369;
+    color: white;
+    margin-top: 20px;
+}
+
+.logout{
+      background-color: #EEEEEE;
+      color: black;
 }

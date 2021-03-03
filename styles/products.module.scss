@@ -1,0 +1,30 @@
+.products{
+    background-color: white;
+    min-height: calc(100vh - 80px);
+    padding: 20px;
+
+    h3{
+        // Need to do something different here
+        font-size: 40px;
+        font-weight: 300;
+        font-family: 'Permanent Marker', cursive;
+        text-decoration: underline #5fbaf7;
+    }
+
+
+}
+
+.product__container{
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.center__loader{
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

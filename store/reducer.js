@@ -11,7 +11,11 @@ const reducer = (state, action) => {
         case ACTIONS.REGISTER:
             return { ...state, user : action.payload.user, message : action.payload.message}
         case ACTIONS.LOGOUT:
-            return { ...state, user : {}, cart : {}, message : { text : 'User Logged Out', category : 'info'}}
+            return { ...state, user : {}, cart : [], message : { text : 'User Logged Out', category : 'info'}}
+        case ACTIONS.ADD_CART:
+            return { ...state, cart : [ action.payload  , ...state.cart ], message : { text : `Added ${action.payload.brand}  ${action.payload.name} shoes to cart`, category : 'info'} }
+        case ACTIONS.PERSIST_USER: 
+            return { ...state, user : action.payload}
         default:
             return state
     }

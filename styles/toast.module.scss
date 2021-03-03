@@ -1,6 +1,6 @@
 .toast{
     color: #EEEEEE;
-    position: absolute;
+    position: fixed;
     left: 50%;
     transform: translateX(-50%);
     background-color: #232020;
@@ -8,19 +8,27 @@
     padding: 20px 40px;
     text-align: center;
     font-size: 14px;
-    border-left: 2px solid #5fbaf7;
+    border-left: 4px solid #5fbaf7;
     animation: OpacityIn 200ms ease-in forwards;
     
     
 }
 
 .toast.error{
-    border-left: 2px solid tomato;
+    border-left: 4px solid tomato;
+
+    .times{
+        color: tomato;
+    }
 
 }
 
 .toast.success{
-    border-left: 2px solid palegreen;
+    border-left: 4px solid palegreen;
+
+    .times{
+        color: palegreen;
+    }
 }
 
 .times{

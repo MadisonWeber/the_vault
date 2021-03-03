@@ -36,6 +36,7 @@ const Register = () => {
                 cf_password 
             })
             setLoading(false)
+            localStorage.setItem('USER_TOKEN', data.user.token)
             
             dispatch({type : ACTIONS.REGISTER, payload : { user : data.user, message : {text : data.msg, category : 'success' }}})
             setTimeout(() => {

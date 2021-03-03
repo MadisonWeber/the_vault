@@ -8,8 +8,9 @@ connectDB()
 export default (req, res) => {
     switch(req.method){
         case 'POST': 
-            register(req, res)
-            break
+            return register(req, res)
+        default:
+            return 
     }
 } 
 
@@ -32,7 +33,7 @@ const register = async (req, res) => {
 
         const token = jwt.sign({id : user._id }, process.env.JWT_SECRET)
 
-        res.status(200).json({msg : `User ${name} created. Get Shopping!`, user : {name : user.name, email : user.email, role : user.role, _id : user._id, createdAt : user.createdAt, token : token }})
+        return res.status(200).json({msg : `User ${name} created. Get Shopping!`, user : {name : user.name, email : user.email, role : user.role, _id : user._id, createdAt : user.createdAt, token : token }})
 
     }catch(err){
         return res.status(500).json({msg : err.message})

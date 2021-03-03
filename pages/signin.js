@@ -36,6 +36,8 @@ const SignIn = () => {
             })
             setLoading(false)
             
+            localStorage.setItem('USER_TOKEN', data.user.token)
+            
             dispatch({type : ACTIONS.SIGNIN, payload : { user : data.user, message : {text : data.msg, category : 'success' }}})
             setTimeout(() => {
                 dispatch({type : ACTIONS.CLEAR_MESSAGE})

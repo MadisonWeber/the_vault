@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from '../styles/fourohfour.module.scss';
+import styles from '../styles/fourohfour.module.scss'
 
 const FourOhFour = () => {
     return (

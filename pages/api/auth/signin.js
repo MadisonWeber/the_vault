@@ -8,8 +8,9 @@ connectDB()
 export default (req, res) => {
     switch(req.method){
         case 'POST': 
-            signin(req, res)
-            break
+            return signin(req, res)
+        default:
+            return 
     }
 } 
 
@@ -27,7 +28,7 @@ const signin = async (req, res) => {
 
         const token = jwt.sign({id : existingUser._id }, process.env.JWT_SECRET)
 
-        res.status(200).json({msg : `Logged in ${email} `, user : {name : existingUser.name, email : existingUser.email, role : existingUser.role, _id : existingUser._id, createdAt : existingUser.createdAt, token : token } })
+        return res.status(200).json({msg : `Logged in ${email} `, user : {name : existingUser.name, email : existingUser.email, role : existingUser.role, _id : existingUser._id, createdAt : existingUser.createdAt, token : token } })
 
     }catch(err){
         return res.status(500).json({msg : err.message})

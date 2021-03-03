@@ -35,7 +35,7 @@ const Toast = () => {
         )
     }
 
-    /// 
+    
     return (
         <div className = {styles.toast}>
             {message.text}     
