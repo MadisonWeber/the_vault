@@ -12,7 +12,7 @@ import styles from '../../styles/productpage.module.scss'
 const singleproduct = ({data}) => {
 
     const { state, dispatch } = useContext(GlobalState)
-    const { user } = state
+    const { user, cart } = state
 
 
     const [ product, setProduct ] = useState('')
@@ -27,6 +27,7 @@ const singleproduct = ({data}) => {
 
 
     const handleAddCart = (product) => {
+        
         if(!user.name){
             dispatch({type : ACTIONS.UPDATE_MESSAGE, payload : { category : 'error', text : 'You must be signed in to add an item to the cart'}})
             setTimeout(()=> {
@@ -34,11 +35,26 @@ const singleproduct = ({data}) => {
             }, 2200)
             return 
         }
-   
-        dispatch({type : ACTIONS.ADD_CART, payload : product})
-        setTimeout(()=> {
-            dispatch({ type : ACTIONS.CLEAR_MESSAGE})
-        }, 1800)
+        
+        const cartIds = cart.map( item => item._id)
+       
+        
+        if(cartIds.includes(product._id)){
+            dispatch({type : ACTIONS.UPDATE_MESSAGE, payload : { category : 'error', text : 'That item is already in your Cart'}})
+            
+            setTimeout(()=> {
+                dispatch({ type : ACTIONS.CLEAR_MESSAGE})
+            }, 1800)
+
+        }else{
+
+            product.quantity = 1
+            dispatch({type : ACTIONS.ADD_CART, payload : product})
+
+            setTimeout(()=> {
+                dispatch({ type : ACTIONS.CLEAR_MESSAGE})
+            }, 1800)
+        }
     }
 
 

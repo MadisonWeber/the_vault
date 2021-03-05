@@ -11,10 +11,7 @@ const ProductCard = ({product}) => {
                 <span className = {styles.name}>{product.name}</span>
                 <span className = {styles.price}> $ {product.price}</span>
                 <Link href = {`/products/${product._id}`}><button className = {styles.product__link}>See Product</button></Link>
-
             </div>
-
-     
         </div>
     )
 }
