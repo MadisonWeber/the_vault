@@ -14,6 +14,8 @@ const getProducts = () => {
       }
 }
 
+/// Can't use swr in getStaticProps :( 
+
 const getProduct = (id) => {
   const { data, error} = useSWR(`http://localhost:3000/api/products/${id}`, fetcher)
 

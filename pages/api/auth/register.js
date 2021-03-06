@@ -1,6 +1,6 @@
 import connectDB from '../../../utils/connectDB'
 import bcrypt from 'bcrypt'
-import Users from '../../../models/user.model'
+import User from '../../../models/user.model'
 import jwt from 'jsonwebtoken'
 
 connectDB()
@@ -19,11 +19,11 @@ export default (req, res) => {
 const register = async (req, res) => {
     try{
         const { email, name, password } = req.body
-        const checkEmail = await Users.findOne({email})
+        const checkEmail = await User.findOne({email})
         if(checkEmail) return res.status(400).json({msg: `Already a user registered for ${email}.. sign in instead.`})
         
         const hashedPassword = await bcrypt.hash(password, 10)
-        const newUser = new Users({
+        const newUser = new User({
             name, 
             email, 
             password : hashedPassword

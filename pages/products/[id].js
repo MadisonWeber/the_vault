@@ -61,9 +61,6 @@ const singleproduct = ({data}) => {
 
 
 
-
-
-
     if(router.isFallback) {
         return (
             <Layout description = 'Vault Product Page'>

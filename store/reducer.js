@@ -33,6 +33,8 @@ const reducer = (state, action) => {
             return { ...state, cart : newCartThree}
         case ACTIONS.PERSIST_USER: 
             return { ...state, user : action.payload}
+        case ACTIONS.ORDER_SUCCESS:
+            return {...state, cart : []}
         default:
             return state
     }

@@ -1,0 +1,133 @@
+
+.hamburger__open{
+    position: fixed;
+    height: 100vh;
+    width: calc(min(320px, 96%));
+    background-color: #5fbaf7;
+    z-index: 2000;
+    right: 0;
+    top: 0;
+    padding-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    transform: translateX(0px);
+    transition: transform 400ms ease-in, background-color 550ms ease-in;
+}
+
+.hamburger__closed{
+    position: fixed;
+    height: 100vh;
+    width: calc(min(320px, 96%));
+    background-color: black;
+    z-index: 2000;
+    right: 0;
+    top: 0;
+    padding-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    transform: translateX(600px);
+    transition: transform 400ms ease-in, background-color 280ms ease-in;
+}
+
+.vault_ham_header{
+    font-size: 30px;
+    margin-bottom: 40px;
+    font-family: 'Permanent Marker', cursive;
+    color: black;
+}
+
+
+.vault_ham_ul{
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    flex-grow: 1;
+
+
+
+    li{
+        cursor: pointer;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        font-size: 18px;
+        font-weight: 500;
+        transition: 100ms ease-in;
+        letter-spacing: 1px;
+
+     
+        &::first-letter{
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        &:hover{
+            color: black;
+        }
+    }
+}
+
+
+
+.order__history{
+ 
+    margin-top: auto;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    color: white;
+    border: 2px solid white;
+    background-color: #5fbaf7;
+
+    &:hover{
+        background-color: white;
+        color: #5fbaf7;
+    }
+}
+
+.logout{
+    padding: 10px 0;
+    background-color: white;
+    color: #5fbaf7;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+
+    &:hover{
+        // background-color: #5fbaf7;
+        // color: white;
+        // border: 2px solid white;
+        background-color: #EEEEEE;
+    }
+}
+
+.signin{
+    margin-top: auto;
+    margin-bottom: 10px;
+    padding: 10px 0;
+    color: white;
+    border: 2px solid white;
+    background-color: #5fbaf7;
+
+    &:hover{
+        background-color: white;
+        color: #5fbaf7;
+    }
+
+}
+
+.times{
+    color: black;
+    font-size: 24px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    cursor: pointer;
+    transition: 200ms ease-in;
+
+    &:hover{
+        transform: rotate(180deg);
+    }
+}

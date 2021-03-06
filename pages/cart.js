@@ -1,9 +1,13 @@
 import Layout from '../components/Layout'
+import LoaderTwo from '../components/LoaderTwo'
 import { useContext, useEffect, useState } from 'react'
 import { GlobalState } from "../store/GlobalState"
 import ACTIONS from '../store/actions'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 import styles from '../styles/cart.module.scss'
+// import sendEmail from '../utils/email'
 
 const cart = () => {
 
@@ -11,7 +15,10 @@ const cart = () => {
     const { cart, user } = state
     const [ totalPrice, setTotalPrice ] = useState(0)
     const [ deliverInfo, setDeliverInfo ] = useState({city : '', street: '', postalCode : '' })
+    const [ loading , setLoading ] = useState(false)
     const { city, street, postalCode } = deliverInfo
+
+    const router = useRouter()
 
     useEffect(() => {
         const cartCost = cart.reduce( (acc, cur) => {
@@ -25,11 +32,6 @@ const cart = () => {
         const { name, value } = e.target
         setDeliverInfo({...deliverInfo, [name] : value})
     }   
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log('checking out')
-    }
 
     const removeFromCart = (item) => {
         dispatch({type : ACTIONS.REMOVE_CART, payload : {id : item._id, name : item.name}})
@@ -48,7 +50,28 @@ const cart = () => {
     }
 
 
-    console.log("cart is", cart)
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try{
+            setLoading(true)
+            const { data }  = await axios.post('http://localhost:3000/api/orders', {
+                userId : user._id,
+                address : deliverInfo,
+                cart,
+                total : totalPrice.toFixed(2)
+            })
+           router.push(`/orders/${data.order._id}`)
+          
+
+            setLoading(false)
+
+        }catch(error){
+            setLoading(false)
+            console.log(error)
+        }
+    }
+
+
 
     if(!user.name){
         return (
@@ -126,7 +149,7 @@ const cart = () => {
                                 <p>Total After Tax :</p>
                                 <span>$ {(totalPrice * 1.15).toFixed(2)}</span>
                             </div>
-                            <button type="submit" form="checkout__form" >Checkout</button>
+                            <button type="submit" form="checkout__form" > {loading ? <LoaderTwo/> : "Checkout" }</button>
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ const GlobalStateProvider = ({children}) => {
             const { data } = await axios.post("http://localhost:3000/api/auth/refreshUser", 
             { token : savedToken})  
 
+            console.log('getting user again')
             dispatch({type : ACTIONS.PERSIST_USER, payload : data})
         }
 
