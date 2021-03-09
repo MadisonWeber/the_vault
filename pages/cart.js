@@ -77,7 +77,7 @@ const cart = () => {
         return (
             <Layout>
                 <div className = {styles.cart}>
-                    <h1>Your Cart</h1>
+                    <h2>Your Cart</h2>
                     <div className = {styles.noUser}>
                        <p>You need to <Link href = "/signin">Signin</Link> to use the Cart</p>
                     </div>
@@ -90,7 +90,7 @@ const cart = () => {
         return(
         <Layout>
             <div className = {styles.cart}>
-                <h1>Your Cart</h1>
+                <h2>Your Cart</h2>
                 <div className = {styles.noUser}>
                       <p>You have no <Link href = "/products">Products</Link> in the Cart</p>
                 </div>
@@ -104,7 +104,7 @@ const cart = () => {
     return (
         <Layout description = 'the vault user cart'>
             <div className = {styles.cart}>
-                <h1>Your Cart</h1>
+                <h2>Your Cart</h2>
                 <div className = {styles.cart__inner}>
                     <div className = {styles.cart__left}>
                         <h3 className = {styles.heading} >Items</h3>
@@ -133,23 +133,24 @@ const cart = () => {
                         <h3 className = {styles.heading} >Checkout</h3>
                         <div className = {styles.checkout__container}>
                             <form className = {styles.checkout__form} id = 'checkout__form' onSubmit = {handleSubmit}>
+                                <h5>Fill in your address to checkout</h5>
                                 <label htmlFor="street">Street</label>
                                 <input type="text" id = "street" name = 'street' value = {street} onChange = {handleChange}/>
                                 <label htmlFor="city">City</label>
                                 <input type="text" id = "city"  name = 'city' value = {city} onChange = {handleChange}/>
                                 <label htmlFor="postalCode">Postal Code</label>
                                 <input type="text" id = "postalCode" name ='postalCode' value = {postalCode} onChange = {handleChange}/>
-                            
+                                <div className = {styles.total__holder__top}>
+                                    <p>Cart Total :</p>
+                                    <span>$ {(totalPrice).toFixed(2)}</span>
+                                </div>
+                                 <div className = {styles.total__holder}>
+                                    <p>Total After Tax :</p>
+                                    <span>$ {(totalPrice * 1.15).toFixed(2)}</span>
+                                </div>
+                                <button type="submit" form="checkout__form" > {loading ? <LoaderTwo/> : "Checkout" }</button>
                             </form>
-                            <div className = {styles.total__holder__top}>
-                                <p>Cart Total :</p>
-                                 <span>$ {(totalPrice).toFixed(2)}</span>
-                            </div>
-                            <div className = {styles.total__holder}>
-                                <p>Total After Tax :</p>
-                                <span>$ {(totalPrice * 1.15).toFixed(2)}</span>
-                            </div>
-                            <button type="submit" form="checkout__form" > {loading ? <LoaderTwo/> : "Checkout" }</button>
+                            
                         </div>
                     </div>
                 </div>

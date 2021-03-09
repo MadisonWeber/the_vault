@@ -48,14 +48,12 @@ const SecondaryNav = ({menuOpen, setMenuOpen, user, dispatch, cart}) => {
                 <Link href = "/cart"><li>Cart ({cart.length})</li></Link>
                 {user.name ? 
                 (<>
-                    <Link href = '/'><button className = {styles.order__history}>See Order History</button></Link>
+                    <Link href = {`/orders/orderhistory/${user._id}`}><button className = {styles.order__history}>See Order History</button></Link>
                     <button onClick = {handleLogout} className = {styles.logout}>Logout</button>
                 </>
                 )
                 : 
-            
                 <Link href = "/signin"><button className = {styles.signin}>Sign In</button></Link>
-
                 }
             </ul>
             <i className = {['fas fa-times', styles.times].join(' ')} onClick = {() => setMenuOpen(p => !p)}></i>

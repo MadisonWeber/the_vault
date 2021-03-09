@@ -10,7 +10,7 @@ const ProductCard = ({product}) => {
                 <span className = {styles.brand}>{product.brand}</span>
                 <span className = {styles.name}>{product.name}</span>
                 <span className = {styles.price}> $ {product.price}</span>
-                <Link href = {`/products/${product._id}`}><button className = {styles.product__link}>See Product</button></Link>
+                <Link href = {`/products/${product._id}`}><button className = {styles.product__link}>Go To Product</button></Link>
             </div>
         </div>
     )

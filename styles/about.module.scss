@@ -1,0 +1,49 @@
+.about{
+    min-height: 100vh;
+    padding: 20px;
+    
+    h2{
+        font-family: 'Permanent Marker', cursive;
+        font-size: 40px;
+        text-decoration: underline 4px solid  #5fbaf7;
+        margin-bottom: 20px;
+    }
+    
+}
+
+.about__inner{
+    border: 2px solid grey;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 10px 20px;
+    gap: 10px;
+
+
+    p{
+        display: block;
+    }
+
+    span{
+        font-weight: 300;
+        font-size: 12px;
+    }
+
+}
+
+.about__text{
+    font-size: 20px;
+
+    &:first-letter{
+        font-size: 28px;
+        font-weight: 700;
+    }
+}
+
+.about__second__text{
+    color: #5fbaf7;
+    font-size: 18px;
+}

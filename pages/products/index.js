@@ -7,7 +7,7 @@ import ProductCard from '../../components/ProductCard'
 const products = () => {
 
 
-    const { data, loading, error } = getProducts() 
+    const { data, loading } = getProducts() 
 
 
     if(loading) return (
