@@ -55,10 +55,13 @@ const cart = () => {
         try{
             setLoading(true)
             const { data }  = await axios.post('http://localhost:3000/api/orders', {
-                userId : user._id,
+                // userId : user._id,
                 address : deliverInfo,
                 cart,
                 total : totalPrice.toFixed(2)
+            }, {
+                headers : {
+                    "authorization" : user.token}
             })
            router.push(`/orders/${data.order._id}`)
           

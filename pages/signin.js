@@ -8,6 +8,7 @@ import LoaderTwo from '../components/LoaderTwo'
 import ACTIONS from '../store/actions'
 import { validateSignin } from '../utils/validate'
 import { useRouter } from 'next/router'
+import Cookie from 'js-cookie'
 
 
 const SignIn = () => {
@@ -37,7 +38,12 @@ const SignIn = () => {
             setLoading(false)
             
             localStorage.setItem('USER_TOKEN', data.user.token)
-            
+            Cookie.set('refreshToken', data.refresh, 
+            {
+                expires : 7, 
+            }
+            )
+
             dispatch({type : ACTIONS.SIGNIN, payload : { user : data.user, message : {text : data.msg, category : 'success' }}})
             setTimeout(() => {
                 dispatch({type : ACTIONS.CLEAR_MESSAGE})

@@ -1,6 +1,6 @@
 import connectDB from '../../../../utils/connectDB'
 import Order from '../../../../models/order.model'
-import User from '../../../../models/user.model'
+// import authorize from '../../../../middleware/auth'
 
 connectDB()
 
@@ -15,10 +15,11 @@ export default (req, res) => {
 
 const getOrderHistory = async (req, res) => {
     try {
+        // const { id } = await authorize(req, res)
+
         const { id } = req.query
-        console.log('id is', id)
         const orders =  await Order.find({user : id})
-        console.log('orders are ', orders)
+       
         if(!orders) return res.status(400).json({msg : 'Order does not exist.'})
      
         return res.status(200).json(orders)

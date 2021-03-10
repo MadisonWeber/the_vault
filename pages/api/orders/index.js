@@ -1,5 +1,6 @@
 import Order from '../../../models/order.model'
 import connectDB from '../../../utils/connectDB'
+import authorize from "../../../middleware/auth"
 
 connectDB()
 
@@ -13,16 +14,17 @@ export default (req, res) => {
 }
 
 const postOrder = async (req, res) => {
-    const { userId, address, cart, total} = req.body 
+    const { address, cart, total} = req.body 
+    const { id } = await authorize(req, res)
     try {
         if(cart.length < 1) return res.status(400).json({msg : "Must have items in cart to order"})
-        if(!userId) return res.status(400).json({msg : "Did not recieve user id"})
+        if(!id) return res.status(400).json({msg : "Did not recieve user id"})
         if(!address) return res.status(400).json({msg : "Did not recieve address"})
         if(!address) return res.status(400).json({msg : "Did not recieve total"})
 
         const newOrder = new Order({
             address, 
-            user : userId, 
+            user : id, 
             cart,
             total
         })

@@ -8,6 +8,8 @@ import axios from 'axios';
 import { useRouter } from 'next/router'
 import styles from '../styles/signin.module.scss'
 import { validateRegister } from "../utils/validate"
+import Cookie from 'js-cookie'
+
 
 const Register = () => {
 
@@ -37,6 +39,10 @@ const Register = () => {
             })
             setLoading(false)
             localStorage.setItem('USER_TOKEN', data.user.token)
+           
+            Cookie.set('refreshToken', data.refresh, {
+                expires : 7, 
+            })
             
             dispatch({type : ACTIONS.REGISTER, payload : { user : data.user, message : {text : data.msg, category : 'success' }}})
             setTimeout(() => {

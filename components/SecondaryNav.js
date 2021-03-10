@@ -2,15 +2,21 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import styles from '../styles/secondarynav.module.scss'
 import ACTIONS from '../store/actions'
+import { useRouter }  from 'next/router'
+import Cookie from 'js-cookie'
 
 const SecondaryNav = ({menuOpen, setMenuOpen, user, dispatch, cart}) => {
 
     const secRef = useRef(null)
+    const router = useRouter()
+
 
     const handleLogout = () => {
         dispatch({ type : ACTIONS.LOGOUT})
-
+        router.push('/products')
         localStorage.removeItem("USER_TOKEN")
+
+        Cookie.remove('refreshToken')
 
         setTimeout(() => {
             dispatch({type : ACTIONS.CLEAR_MESSAGE})

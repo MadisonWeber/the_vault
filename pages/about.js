@@ -1,7 +1,17 @@
 import Layout from '../components/Layout'
 import styles from '../styles/about.module.scss'
+import axios from 'axios'
 
 const about = () => {
+
+
+    const handleRefresh = async () => {
+        console.log(
+            'getting tokens'
+        )
+       await axios.get("http://localhost:3000/api/auth/refetchTokens")
+    }
+
     return (
         <Layout description = 'The Vault About Page'>
             <div className = {styles.about}>
@@ -12,6 +22,7 @@ const about = () => {
                     </p>
                     <p className = {styles.about__second__text}>If you want to be cool you have to shop here.</p>
                     <span>* This is not a real shop, you cannot actually buy anything. It is a mock project made by Madison Weber.</span>
+                    <button onClick = {handleRefresh}>Get Refresh Tokens</button>
                 </div>
             </div>
         </Layout>

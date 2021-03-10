@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import User from '../../../models/user.model'
 import jwt from 'jsonwebtoken'
 
+
 connectDB()
 
 export default (req, res) => {
@@ -31,9 +32,10 @@ const register = async (req, res) => {
 
         const user = await newUser.save()
 
-        const token = jwt.sign({id : user._id }, process.env.JWT_SECRET)
+        const token = jwt.sign({id : user._id }, process.env.JWT_SECRET , {expiresIn : '1h'})
+        const refreshToken = jwt.sign({id : user._id }, process.env.JWT_REFRESH,  {expiresIn : '7d'})
 
-        return res.status(200).json({msg : `User ${name} created. Get Shopping!`, user : {name : user.name, email : user.email, role : user.role, _id : user._id, createdAt : user.createdAt, token : token }})
+        return res.status(200).json({msg : `User ${name} created. Get Shopping!`, user : {name : user.name, email : user.email, role : user.role, _id : user._id, createdAt : user.createdAt, token : token }, refresh : refreshToken})
 
     }catch(err){
         return res.status(500).json({msg : err.message})
