@@ -95,10 +95,11 @@ const singleproduct = ({data}) => {
                     <p className = {styles.description}>{product.description}</p>
                     <p className = {styles.price}> $ {product.price}</p>
                     <button className = {styles.add__cart} onClick = {()=> handleAddCart(product)}>Add To Cart</button>
-                    <Link href = "/products"><button className = {styles.return}>Back To All Products</button></Link>
+                    <Link href = "/cart"><button className = {styles.return}>Go To Cart</button></Link>
                 </div>
    
             </div>
+            {/* <button className = {styles.go__back}><i class="fas fa-arrow-left"></i>Back to Products Page</button> */}
         </Layout>
     )
 }

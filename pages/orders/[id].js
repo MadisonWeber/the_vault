@@ -15,9 +15,6 @@ const confirmOrder = ({data}) => {
 
     useEffect(() => {
         dispatch({type : ACTIONS.ORDER_SUCCESS})
-
-        // Remember to uncomment in production
-        // sendEmail(data)
     }, [])
 
     return (

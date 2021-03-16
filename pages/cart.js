@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styles from '../styles/cart.module.scss'
-// import sendEmail from '../utils/email'
+import sendEmail from '../utils/email'
 
 const cart = () => {
 
@@ -63,9 +63,10 @@ const cart = () => {
                 headers : {
                     "authorization" : user.token}
             })
-           router.push(`/orders/${data.order._id}`)
-          
 
+            //uncomment for production
+            // sendEmail(data)
+           router.push(`/orders/${data.order._id}`)
             setLoading(false)
 
         }catch(error){
