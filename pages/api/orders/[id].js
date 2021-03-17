@@ -14,6 +14,8 @@ export default (req, res) => {
     }
 }
 
+// Gets Single User Order by id
+
 const getOrder = async (req, res) => {
     try {
         const { id } = req.query

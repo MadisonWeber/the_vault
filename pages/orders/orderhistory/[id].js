@@ -70,7 +70,7 @@ export default orderhistory
 
 
 export const getServerSideProps = async (ctx) => {
-    console.log('ctx is', ctx)
+
     const { id } = ctx.params
     const { data }  = await axios.get(`http://localhost:3000/api/orders/orderhistory/${id}`)
 

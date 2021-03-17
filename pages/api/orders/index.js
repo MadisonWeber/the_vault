@@ -13,6 +13,8 @@ export default (req, res) => {
     }
 }
 
+// Add order to Order History
+
 const postOrder = async (req, res) => {
     const { address, cart, total} = req.body 
     const { id } = await authorize(req, res)

@@ -24,7 +24,7 @@ const singleproduct = ({data}) => {
     }, [])
 
     const router = useRouter()
-
+   
 
     const handleAddCart = (product) => {
         
@@ -71,7 +71,10 @@ const singleproduct = ({data}) => {
 
     return (
         <Layout description = 'Vault Product Page'>
-            <h2 className = {styles.feature__name}>{product.name}</h2>
+            <div className = {styles.product__header}>
+                <h2 className = {styles.feature__name}>{product.name}</h2>
+                <Link href = '/products'>Go Back</Link>
+            </div>
             <div className = {styles.single__product}>
                 <div className={styles.product__left}>
                     <img className = {styles.feature__image} src={bigImage} alt="hero"/>
@@ -99,7 +102,7 @@ const singleproduct = ({data}) => {
                 </div>
    
             </div>
-            {/* <button className = {styles.go__back}><i class="fas fa-arrow-left"></i>Back to Products Page</button> */}
+        
         </Layout>
     )
 }

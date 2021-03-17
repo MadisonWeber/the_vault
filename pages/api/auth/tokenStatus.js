@@ -12,6 +12,7 @@ const tokenStatus = (req, res) => {
         
 
         //Check if token is almost expired
+
         const token = req.headers.authorization
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         const minsToExpire = ((Date.now()/ 60000) - ((decoded.exp * 1000 / 60000))) * -1

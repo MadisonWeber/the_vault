@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import styles from '../styles/cart.module.scss'
+import { validateCheckout } from '../utils/validate'
 import sendEmail from '../utils/email'
 
 const cart = () => {
@@ -18,8 +19,9 @@ const cart = () => {
     const [ loading , setLoading ] = useState(false)
     const { city, street, postalCode } = deliverInfo
 
-    const router = useRouter()
 
+    const router = useRouter()
+   
     useEffect(() => {
         const cartCost = cart.reduce( (acc, cur) => {
             return acc + (cur.price * cur.quantity)
@@ -42,11 +44,11 @@ const cart = () => {
     }
 
     const plusQuantity = (id) => {
-        dispatch({type : ACTIONS.ADD_QUANTITY, payload : {id, id}})
+        dispatch({type : ACTIONS.ADD_QUANTITY, payload : {id : id}})
     }
 
     const minusQuantity = (id) => {
-        dispatch({type : ACTIONS.MINUS_QUANTITY, payload : {id, id}})
+        dispatch({type : ACTIONS.MINUS_QUANTITY, payload : {id : id}})
     }
 
 
@@ -54,8 +56,49 @@ const cart = () => {
         e.preventDefault()
         try{
             setLoading(true)
-            const { data }  = await axios.post('http://localhost:3000/api/orders', {
-                // userId : user._id,
+
+            // Validate the Delivery Address is OK
+            const msg = validateCheckout(street, city, postalCode)
+            if(msg){
+                setLoading(false)
+                return dispatch({type : ACTIONS.UPDATE_MESSAGE, payload : {text : msg , category : 'error'} })
+            }
+
+            // Check there is enough quantity left to order products in cart
+            // For each product in cart... check if there is enough stock left.. if there is, add to sold, remove from inStock
+
+            const checkProduct = async (item) => {
+                try {
+                    const { data } = await axios.patch('http://localhost:3000/api/products', {
+                        productId : item._id,
+                        quantity : item.quantity
+                    },
+                    {
+                        headers : {
+                            "authorization" : user.token
+                        }
+                    })
+
+                    return true
+                } catch (error) {
+                    return error.response.data.msg
+                }
+            }
+
+            const checkQuantity = await Promise.all(cart.map(item => checkProduct(item)))
+            const allGood = checkQuantity.every( prod => prod === true)
+           
+            
+            if(!allGood){
+                let filtered = checkQuantity.filter( prod => prod !== true)
+                console.log('filtered is ', filtered[0])
+                setLoading(false)
+                return dispatch({type : ACTIONS.UPDATE_MESSAGE, payload : { text : filtered[0], category : 'error'}})
+            } 
+
+            
+            // Post Order to Orders
+           const { data }  = await axios.post('http://localhost:3000/api/orders', {
                 address : deliverInfo,
                 cart,
                 total : totalPrice.toFixed(2)
@@ -63,11 +106,13 @@ const cart = () => {
                 headers : {
                     "authorization" : user.token}
             })
+            
 
             //uncomment for production
-            // sendEmail(data)
+            // Send Confirmation email to user
+           sendEmail(data.order, user.email, user.name)
            router.push(`/orders/${data.order._id}`)
-            setLoading(false)
+           setLoading(false)
 
         }catch(error){
             setLoading(false)
@@ -123,7 +168,9 @@ const cart = () => {
                                         <span> Left in Stock : {item.inStock}</span>
                                     </div>
                                     <div className = {styles.choose__quantity}>
-                                        <button onClick = {()=> plusQuantity(item._id)}>+</button>
+                                        <button onClick = {()=> plusQuantity(item._id)}
+                                        //  disabled = {item.inStock <= item.quantity}
+                                         >+</button>
                                         <p>Quantity : {item.quantity}</p>
                                         <button onClick = {() => minusQuantity(item._id)} disabled = {item.quantity <= 1}>-</button>
                                     </div>
