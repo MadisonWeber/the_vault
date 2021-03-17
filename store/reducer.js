@@ -37,6 +37,8 @@ const reducer = (state, action) => {
             return {...state, cart : []}
         case ACTIONS.NEW_TOKEN:
             return { ...state, user : {...state.user, token : action.payload}}
+        case ACTIONS.PERSIST_CART:
+            return { ...state, cart : action.payload}
         default:
             return state
     }

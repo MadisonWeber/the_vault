@@ -12,16 +12,16 @@ export default function Home() {
               <Link href = "/products"><button className = {styles.shop__btn}>Shop All Products 🔥</button></Link>
             </div>
             <div className = {styles.feature__two}>
-              <button className = {styles.shop__btn}>Shop Nike 🔥</button>
+              <Link href = {{ pathname : "/products", query:  {search : 'Nike'}}}><button className = {styles.shop__btn}>Shop Nike 🔥</button></Link>
             </div>
             <div className = {styles.secondary__one}>
-              <button className = {styles.shop__btn}>Shop Vans 🔥</button>
+              <Link href = {{ pathname : "/products", query:  {search : 'Vans'}}}><button className = {styles.shop__btn}>Shop Vans 🔥</button></Link>
             </div>
             <div className = {styles.secondary__two} >
-              <button className = {styles.shop__btn}>Shop Training 🔥</button>
+              <Link href = {{ pathname : "/products", query:  {search : 'New Balance'}}}><button className = {styles.shop__btn}>Shop New Balance 🔥</button></Link>
             </div>
             <div className = {styles.secondary__three}>
-              <button className = {styles.shop__btn}>Shop Vintage 🔥</button>
+              <Link href = {{ pathname : "/products", query:  {search : 'Adidas'}}}><button className = {styles.shop__btn}>Shop Adidas 🔥</button></Link>
             </div>
         </div>
     </Layout>

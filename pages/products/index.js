@@ -4,23 +4,38 @@ import { getProducts } from "../../swr/productsHook"
 import styles from '../../styles/products.module.scss'
 import LoaderOne from "../../components/LoaderOne"
 import ProductCard from '../../components/ProductCard'
-
+import { useRouter } from 'next/router'
 const products = () => {
 
+    const router = useRouter()
 
     const { data, loading } = getProducts() 
     const searchRef = useRef(null)
     const brandsRef = useRef(null)
     const [ brands, setBrands ] = useState([]) 
-    const [ filterOpen, setFilterOpen ] = useState(false)
+    const [ filterOpen, setFilterOpen ] = useState( router.query.search ? true : false )
     const [ searchQuery, setSearchQuery ] = useState('')
     const [ filteredData , setFilteredData ] = useState([])
     const [ filteredBrands, setFilteredBrands ] = useState([])
    
+
+
     useEffect(() => {
         const brandList = data ? Array.from(new Set(data.products.map((product)=> product.brand))) : []
         setBrands(brandList)
     }, [data])
+
+    
+
+    // Somewhat hacky way to link to pass search data from landing page. Passes search in the form or url query.. and then quickly changes url back via shallow route
+    useEffect(() => {
+        if(router.query.search && brandsRef && data){
+            const filtered = data.products.filter( product => product.brand.toLowerCase().includes(router.query.search.toLowerCase())) 
+            setFilteredBrands(filtered)
+            brandsRef.current.value = router.query.search
+            router.push('/products', undefined, { shallow: true })
+        }
+    }, [brands])
 
 
     const handleSearch = (e) => {

@@ -16,8 +16,8 @@ const SecondaryNav = ({menuOpen, setMenuOpen, user, dispatch, cart}) => {
         router.push('/products')
         localStorage.removeItem("USER_TOKEN")
 
+        localStorage.removeItem('VAULT_CART')
         Cookie.remove('refreshToken')
-
         setTimeout(() => {
             dispatch({type : ACTIONS.CLEAR_MESSAGE})
         }, 2200)

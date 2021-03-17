@@ -110,6 +110,7 @@ const cart = () => {
 
             //uncomment for production
             // Send Confirmation email to user
+           localStorage.removeItem('VAULT_CART')
            sendEmail(data.order, user.email, user.name)
            router.push(`/orders/${data.order._id}`)
            setLoading(false)
@@ -169,7 +170,7 @@ const cart = () => {
                                     </div>
                                     <div className = {styles.choose__quantity}>
                                         <button onClick = {()=> plusQuantity(item._id)}
-                                        //  disabled = {item.inStock <= item.quantity}
+                                         disabled = {item.inStock <= item.quantity}
                                          >+</button>
                                         <p>Quantity : {item.quantity}</p>
                                         <button onClick = {() => minusQuantity(item._id)} disabled = {item.quantity <= 1}>-</button>

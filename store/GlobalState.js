@@ -17,6 +17,23 @@ const GlobalStateProvider = ({children}) => {
     const [state, dispatch ] = useReducer(reducer, initialState)
     const router = useRouter()
 
+    const { cart } = state
+
+    // Handles Persisting of Cart
+    useEffect(() => {
+        const previousCart = JSON.parse(localStorage.getItem("VAULT_CART"))
+        console.log("previous cart is ", previousCart)
+        dispatch({type : ACTIONS.PERSIST_CART, payload : previousCart})
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("VAULT_CART", JSON.stringify(cart))
+    }, [cart])
+
+
+
+
+
     /// Keeps the user logged in on Refresh.. using JWT from localStoreage
     useEffect(() => {
         const handleRefetchUser = async () => {
@@ -57,7 +74,7 @@ const GlobalStateProvider = ({children}) => {
                         "authorization" : savedToken
                     }
                 })
-                console.log("checkTokens data is ", data)
+                // console.log("checkTokens data is ", data)
 
                 // Token isn't nearing expiry
                 if(data.msg === 'ok') return 
