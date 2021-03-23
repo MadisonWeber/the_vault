@@ -7,6 +7,10 @@
     text-decoration: underline #5fbaf7;
 }
 
+.container{
+    background-color: white;
+    min-height: calc((100vh - 80px));
+}
 
 .product__header{
 
@@ -35,6 +39,7 @@
 
 
 .single__product{
+
     width: calc(min(100%, 1200px));
     padding: 20px;
     display: flex;

@@ -22,15 +22,12 @@ const GlobalStateProvider = ({children}) => {
     // Handles Persisting of Cart
     useEffect(() => {
         const previousCart = JSON.parse(localStorage.getItem("VAULT_CART"))
-        console.log("previous cart is ", previousCart)
         dispatch({type : ACTIONS.PERSIST_CART, payload : previousCart})
     }, [])
 
     useEffect(() => {
         localStorage.setItem("VAULT_CART", JSON.stringify(cart))
     }, [cart])
-
-
 
 
 
@@ -74,13 +71,11 @@ const GlobalStateProvider = ({children}) => {
                         "authorization" : savedToken
                     }
                 })
-                // console.log("checkTokens data is ", data)
-
+             
                 // Token isn't nearing expiry
                 if(data.msg === 'ok') return 
  
             } catch (error) {
-                // console.log(error.response)
                 
                 // Refresh Token near expiry..make user log in again 
                 if(error.response.status === 401 && error.response.data.msg === 'refresh'){
@@ -105,7 +100,6 @@ const GlobalStateProvider = ({children}) => {
                 if(error.response.status === 401 && error.response.data.msg === 'token needed'){
                     try {
                         const { data } = await axios.get('http://localhost:3000/api/auth/refetchTokens')
-                        // console.log('refresh data is', data)
                         localStorage.removeItem('USER_TOKEN')
                         localStorage.setItem('USER_TOKEN', data.token)
                         dispatch({type : ACTIONS.NEW_TOKEN, payload : data.token})

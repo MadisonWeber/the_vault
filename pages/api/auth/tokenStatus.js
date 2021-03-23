@@ -4,6 +4,7 @@ const tokenStatus = (req, res) => {
     try {
 
         //Check if Refresh is almost expired
+       
         const refresh = req.headers.cookie.split('=')[1]
         const refreshDecoded = jwt.verify(refresh, process.env.JWT_REFRESH)
         const refreshMinsToExpire = ((Date.now()/ 60000) - ((refreshDecoded.exp * 1000 / 60000))) * -1

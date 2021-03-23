@@ -71,36 +71,38 @@ const singleproduct = ({data}) => {
 
     return (
         <Layout description = 'Vault Product Page'>
-            <div className = {styles.product__header}>
-                <h2 className = {styles.feature__name}>{product.name}</h2>
-                <Link href = '/products'>Go Back</Link>
-            </div>
-            <div className = {styles.single__product}>
-                <div className={styles.product__left}>
-                    <img className = {styles.feature__image} src={bigImage} alt="hero"/>
-                    <div className = {styles.img__container}>
-                        {
-                            product.images && product.images.map( (image, index) => {
-                                return <img className = {styles.sec__img}
-                                key = {index}
-                                src = {image}
-                                alt = {image}
-                                onMouseEnter = {() => setBigImage(product.images[index])}
-                                onMouseLeave ={() => setBigImage(product.heroImage)}
-                                />
-                            })
-                        }
+            <div className = {styles.container}>
+                <div className = {styles.product__header}>
+                    <h2 className = {styles.feature__name}>{product.name}</h2>
+                    <Link href = '/products'>Go Back</Link>
+                </div>
+                <div className = {styles.single__product}>
+                    <div className={styles.product__left}>
+                        <img className = {styles.feature__image} src={bigImage} alt="hero"/>
+                        <div className = {styles.img__container}>
+                            {
+                                product.images && product.images.map( (image, index) => {
+                                    return <img className = {styles.sec__img}
+                                    key = {index}
+                                    src = {image}
+                                    alt = {image}
+                                    onMouseEnter = {() => setBigImage(product.images[index])}
+                                    onMouseLeave ={() => setBigImage(product.heroImage)}
+                                    />
+                                })
+                            }
+                        </div>
                     </div>
+                    <div className={styles.product__right}>
+                        <h5 className = {styles.brand}>{product.brand}</h5>
+                        <h2 className = {styles.name}>{product.name}</h2>
+                        <p className = {styles.description}>{product.description}</p>
+                        <p className = {styles.price}> $ {product.price}</p>
+                        <button className = {styles.add__cart} onClick = {()=> handleAddCart(product)}>Add To Cart</button>
+                        <Link href = "/cart"><button className = {styles.return}>Go To Cart</button></Link>
+                    </div>
+    
                 </div>
-                <div className={styles.product__right}>
-                    <h5 className = {styles.brand}>{product.brand}</h5>
-                    <h2 className = {styles.name}>{product.name}</h2>
-                    <p className = {styles.description}>{product.description}</p>
-                    <p className = {styles.price}> $ {product.price}</p>
-                    <button className = {styles.add__cart} onClick = {()=> handleAddCart(product)}>Add To Cart</button>
-                    <Link href = "/cart"><button className = {styles.return}>Go To Cart</button></Link>
-                </div>
-   
             </div>
         
         </Layout>
@@ -130,7 +132,6 @@ export const getServerSideProps = async ({params}) => {
 //             {params : { id : product._id}}
 //         )
 //     )
-
 //     return { paths, fallback : true }
 // }
 
@@ -144,7 +145,6 @@ export const getServerSideProps = async ({params}) => {
 
 //     const data = JSON.parse(JSON.stringify(res))
 //     // Stupid workaround for serilization error
-
 //         return {
 //         props :{
 //            data : data

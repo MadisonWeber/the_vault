@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const fetcher = (url) => axios.get(url).then(data => data.data)
 
-const getProducts = () => {
+export const getProducts = () => {
 
     const {data, error} = useSWR('http://localhost:3000/api/products', fetcher)
    
@@ -15,4 +15,3 @@ const getProducts = () => {
 }
 
 
-export { getProducts }

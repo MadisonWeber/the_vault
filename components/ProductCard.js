@@ -5,6 +5,7 @@ import styles from "../styles/productcard.module.scss"
 const ProductCard = ({product}) => {
     return (
         <div className = {styles.card}>
+            {product.hot && <span className = {styles.hot}>🔥 Seller</span>}
             <img src={product.heroImage} alt="product" />
             <div className = { styles.product__info}>
                 <span className = {styles.brand}>{product.brand}</span>

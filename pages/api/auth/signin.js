@@ -29,9 +29,9 @@ const signin = async (req, res) => {
 
         const token = jwt.sign({id : existingUser._id }, process.env.JWT_SECRET, {expiresIn : process.env.JWT_EXPIRY_TIME})
         const refreshToken = jwt.sign({id : existingUser._id }, process.env.JWT_REFRESH, {expiresIn : process.env.JWT_REFRESH_EXPIRY_TIME})
-     
+        
 
-        return res.status(200).json({msg : `Logged in ${email} `, user : {name : existingUser.name, email : existingUser.email, role : existingUser.role, _id : existingUser._id, createdAt : existingUser.createdAt, token : token },  refresh : refreshToken })
+        return res.status(200).json({msg : `Logged in ${email} `, user : {name : existingUser.name, email : existingUser.email, role : existingUser.role, _id : existingUser._id, createdAt : existingUser.createdAt, token : token } ,  refresh : refreshToken })
 
     }catch(err){
         return res.status(500).json({msg : err.message})

@@ -19,7 +19,7 @@ const Profile = () => {
         dispatch({ type : ACTIONS.LOGOUT})
         router.push('/products')
         localStorage.removeItem("USER_TOKEN")
-
+        localStorage.removeItem('VAULT_CART')
         Cookie.remove('refreshToken')
 
         setTimeout(() => {

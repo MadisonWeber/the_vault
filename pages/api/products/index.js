@@ -20,7 +20,6 @@ export default (req, res) => {
 // Gets and returns all products
 const getProducts = async (req, res) => {
     try{
-
         const products = await Product.find()
         if(products.length < 1) return res.status(400).json({msg : 'could not find any products'})
 
@@ -28,7 +27,6 @@ const getProducts = async (req, res) => {
     }catch(error){
         return res.status(500).json({msg : error.message})
     }
-
 }
 
 // Checks and patches products in stock or not

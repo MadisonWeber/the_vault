@@ -5,6 +5,10 @@ import styles from '../../styles/products.module.scss'
 import LoaderOne from "../../components/LoaderOne"
 import ProductCard from '../../components/ProductCard'
 import { useRouter } from 'next/router'
+import Footer from '../../components/Footer'
+
+
+
 const products = () => {
 
     const router = useRouter()
@@ -151,6 +155,7 @@ const products = () => {
                     }
                 </div>
             </div>
+     
         </Layout>
     )
 }

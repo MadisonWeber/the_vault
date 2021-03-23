@@ -40,9 +40,9 @@
     @media screen and (max-width:550px){
         min-height: 1400px;
         grid-template-areas: 
+        "feature__one"
         "secondary__one"
         "feature__two"
-        "feature__one"
         "secondary__two"
         "secondary__three"
     }

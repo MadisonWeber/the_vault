@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Nav from './Nav'
+import Footer from './Footer'
 import Toast from './Toast'
+import { useRouter } from 'next/router';
 
 const Layout = ({children, title = 'The Vault', description = 'Buy Beautiful Clothing'}) => {
+
+    const router = useRouter()
+
     return (
         <>
             <Head>
@@ -14,6 +19,7 @@ const Layout = ({children, title = 'The Vault', description = 'Buy Beautiful Clo
                 <Nav />
                 {children}
                 <Toast />
+                {router.pathname !== '/' && <Footer /> }
             </main>
         </>
     )
