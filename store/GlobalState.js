@@ -22,7 +22,7 @@ const GlobalStateProvider = ({children}) => {
     // Handles Persisting of Cart
     useEffect(() => {
         const previousCart = JSON.parse(localStorage.getItem("VAULT_CART"))
-        dispatch({type : ACTIONS.PERSIST_CART, payload : previousCart})
+        if(previousCart) dispatch({type : ACTIONS.PERSIST_CART, payload : previousCart})
     }, [])
 
     useEffect(() => {
@@ -34,16 +34,20 @@ const GlobalStateProvider = ({children}) => {
     /// Keeps the user logged in on Refresh.. using JWT from localStoreage
     useEffect(() => {
         const handleRefetchUser = async () => {
-            const savedToken = localStorage.getItem('USER_TOKEN')
-            if(!savedToken) return 
+            try{                
+                const savedToken = localStorage.getItem('USER_TOKEN')
+                if(!savedToken) return 
 
-            const { data } = await axios.get("http://localhost:3000/api/auth/refreshUser", 
-            { headers : {
-                "authorization" : savedToken}
-            })  
-            data.token = savedToken
-            console.log('getting user again')
-            dispatch({type : ACTIONS.PERSIST_USER, payload : data})
+                const { data } = await axios.get("http://localhost:3000/api/auth/refreshUser", 
+                { headers : {
+                    "authorization" : savedToken}
+                })  
+                data.token = savedToken
+                console.log('getting user again')
+                dispatch({type : ACTIONS.PERSIST_USER, payload : data})
+            }catch(err){
+                console.log('from refetch user', err)
+            }
         }
         handleRefetchUser()
     }, [])
@@ -106,6 +110,10 @@ const GlobalStateProvider = ({children}) => {
                     } catch (error) {
                         console.log(error)
                     }
+                }
+
+                if(error.response.status === 403){
+
                 }
             }
         }

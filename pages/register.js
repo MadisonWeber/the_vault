@@ -39,9 +39,9 @@ const Register = () => {
             })
             setLoading(false)
             localStorage.setItem('USER_TOKEN', data.user.token)
-           
+            const inThreeHours = new Date(new Date().getTime() + 180 * 60 * 1000)
             Cookie.set('refreshToken', data.refresh, {
-                expires : 7, 
+                expires : inThreeHours, 
             })
             
             dispatch({type : ACTIONS.REGISTER, payload : { user : data.user, message : {text : data.msg, category : 'success' }}})

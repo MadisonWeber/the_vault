@@ -5,6 +5,7 @@ import authorize from '../../../middleware/auth'
 connectDB()
 
 export default async (req, res) => {
+  
     try {
         const { id } = await authorize(req, res)
     

@@ -38,9 +38,10 @@ const SignIn = () => {
             setLoading(false)
             
             localStorage.setItem('USER_TOKEN', data.user.token)
+            const inThreeHours = new Date(new Date().getTime() + 180 * 60 * 1000)
             Cookie.set('refreshToken', data.refresh, 
             {
-                expires : 7, 
+                expires : inThreeHours, 
             }
             )
 
@@ -51,6 +52,7 @@ const SignIn = () => {
             }, 3000)
 
         } catch (error) {
+            console.log(error)
             dispatch({ type : ACTIONS.UPDATE_MESSAGE, payload : { category : 'error', text : error.response.data.msg}})
             setLoading(false)
         }

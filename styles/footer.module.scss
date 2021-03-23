@@ -137,5 +137,9 @@
         background-color: rgba(80, 77, 77, .8);
         letter-spacing: 2px;
 
+
+        &:hover{
+            filter: brightness(120%);
+        }
     }
 }
