@@ -5,6 +5,7 @@ import ACTIONS from './actions'
 import { useRouter } from 'next/router'
 import Cookie from 'js-cookie'
 
+
 export const GlobalState = createContext()
 
 const GlobalStateProvider = ({children}) => {
@@ -17,7 +18,12 @@ const GlobalStateProvider = ({children}) => {
     const [state, dispatch ] = useReducer(reducer, initialState)
     const router = useRouter()
 
-    const { cart } = state
+    const { cart, user } = state
+
+ 
+   
+
+
 
     // Handles Persisting of Cart
     useEffect(() => {
@@ -41,7 +47,8 @@ const GlobalStateProvider = ({children}) => {
                 const { data } = await axios.get("http://localhost:3000/api/auth/refreshUser", 
                 { headers : {
                     "authorization" : savedToken}
-                })  
+                }
+                )  
                 data.token = savedToken
                 console.log('getting user again')
                 dispatch({type : ACTIONS.PERSIST_USER, payload : data})
@@ -51,6 +58,12 @@ const GlobalStateProvider = ({children}) => {
         }
         handleRefetchUser()
     }, [])
+
+
+
+  
+
+
 
     // Causes the tokens to be checked every 9 mins.. in case there is no organic refreshes.
     useEffect(() => {
@@ -81,9 +94,9 @@ const GlobalStateProvider = ({children}) => {
  
             } catch (error) {
                 
-                // Refresh Token near expiry..make user log in again 
-                if(error.response.status === 401 && error.response.data.msg === 'refresh'){
-                    try {
+                // Refresh Token near expiry or expired..make user log in again 
+                if(error.response.status === 401 && error.response.data.msg === 'refresh' || error.response.status === 403){
+                    
                         console.log('executing refresh')
                         dispatch({type : ACTIONS.PERSIST_USER, payload : {}})
                         localStorage.removeItem('USER_TOKEN')
@@ -94,10 +107,6 @@ const GlobalStateProvider = ({children}) => {
                         setTimeout(() => {
                             dispatch({type : ACTIONS.CLEAR_MESSAGE})
                         }, 2600)
-                    } catch (error) {
-                        console.log(error)
-                    }
-
                 }
 
                 // Token nearly expired.. fetch and store a new one
@@ -112,9 +121,6 @@ const GlobalStateProvider = ({children}) => {
                     }
                 }
 
-                if(error.response.status === 403){
-
-                }
             }
         }
         
@@ -122,6 +128,7 @@ const GlobalStateProvider = ({children}) => {
 
 
     }, [tokenCallback])
+
 
 
    

@@ -157,7 +157,7 @@ const cart = () => {
                 <h2>Your Cart</h2>
                 <div className = {styles.cart__inner}>
                     <div className = {styles.cart__left}>
-                        <h3 className = {styles.heading} >Items</h3>
+                        <h3 className = {styles.heading} >Your Bag</h3>
                         <div className = {styles.cart__items}>
                             {
                             cart.map(item => (
@@ -182,10 +182,8 @@ const cart = () => {
                         </div>
                     </div>
                     <div className = {styles.checkout}>
-                        <h3 className = {styles.heading} >Checkout</h3>
-                        <div className = {styles.checkout__container}>
                             <form className = {styles.checkout__form} id = 'checkout__form' onSubmit = {handleSubmit}>
-                                <h5>Fill in your address to checkout</h5>
+                                <h3>Checkout</h3>
                                 <label htmlFor="street">Street</label>
                                 <input type="text" id = "street" name = 'street' value = {street} onChange = {handleChange}/>
                                 <label htmlFor="city">City</label>
@@ -202,8 +200,7 @@ const cart = () => {
                                 </div>
                                 <button type="submit" form="checkout__form" > {loading ? <LoaderTwo/> : "Checkout" }</button>
                             </form>
-                            
-                        </div>
+
                     </div>
                 </div>
 
