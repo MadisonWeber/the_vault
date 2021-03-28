@@ -11,6 +11,7 @@ const CartIcon = () => {
     return (
     <Link href = "/cart" >
         <li className = {styles.cart}>
+            {cart && 
             <>
                 <svg height="38" viewBox="0 0 24 28" width="38" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="21" fill="none" r="2" stroke= {cart.length > 0 ? '#5fbaf7' : "#EEE"} strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
@@ -19,6 +20,7 @@ const CartIcon = () => {
                 </svg>
                 {cart.length > 0 && <span>{cart.length}</span>}
             </>
+            }
         </li>
     </Link>
     )

@@ -1,3 +1,4 @@
+
 import Layout from '../components/Layout'
 import styles from '../styles/hero.module.scss'
 import Link from 'next/link'
@@ -5,6 +6,10 @@ import Link from 'next/link'
 
 
 export default function Home() {
+
+
+
+
   return (
     <Layout>
         <div className = {styles.hero}>

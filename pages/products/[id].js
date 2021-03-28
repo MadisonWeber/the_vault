@@ -3,9 +3,10 @@ import { GlobalState } from '../../store/GlobalState'
 import ACTIONS from '../../store/actions'
 import Layout from '../../components/Layout'
 import LoaderOne from '../../components/LoaderOne'
-import axios from 'axios'
+import connectDB from '../../utils/connectDB'
+// import axios from 'axios'
 import Link from 'next/link'
-// import Product from "../../models/product.model"
+import Product from "../../models/product.model"
 import { useRouter } from 'next/router'
 import styles from '../../styles/productpage.module.scss'
 
@@ -112,43 +113,31 @@ const singleproduct = ({data}) => {
 export default singleproduct
 
 
-export const getServerSideProps = async ({params}) => {
-
-        const { id } = params
-        const { data } = await axios.get(`http://localhost:3000/api/products/${id}`)
-    
-        return { 
-            props: {
-                data 
-            }
-        }
-}
 
 // This is working but is extemely slow in development and keeps logging user out.. may go back to it later
-// export const getStaticPaths = async () =>{
-   
-//     const { data } = await axios.get('http://localhost:3000/api/products/')
-//     const paths = data.products.map( product => (
-//             {params : { id : product._id}}
-//         )
-//     )
-//     return { paths, fallback : true }
-// }
+export const getStaticPaths = async () =>{
+
+    connectDB()
+    const data = await Product.find()
+    const paths = data.map( product => (
+            {params : { id : String(product._id)}}
+        )
+    )
+    return { paths, fallback : true }
+}
 
 
-// export const getStaticProps = async ({params}) => {
-//     const { id } = params
-//     // const { data } = await axios.get(`http://localhost:3000/api/products/${id}`)
-//     // You could fetch this from the api... but because getStaticProps runs on server, you can get data right from DB
+export const getStaticProps = async ({params}) => {
+    const { id } = params
+    connectDB()
+    const res = await Product.findById(id)
 
-//     const res = await Product.findById(id)
-
-//     const data = JSON.parse(JSON.stringify(res))
-//     // Stupid workaround for serilization error
-//         return {
-//         props :{
-//            data : data
-//         },
-//         revalidate : 30, //Data is incrementally regenerated every 30 seconds
-//     }
-// }
+    const data = JSON.parse(JSON.stringify(res))
+    // Stupid workaround for serilization error
+        return {
+        props :{
+           data : data
+        },
+        revalidate : 30, //Data is incrementally regenerated every 30 seconds
+    }
+}
