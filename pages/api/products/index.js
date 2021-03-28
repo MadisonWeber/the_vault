@@ -37,8 +37,7 @@ const patchProduct = async(req, res) => {
         
         const { id } = await authorize(req, res)
         const { productId, quantity } = req.body
-        console.log('productID is ', productId)
-        console.log('quantity is', quantity)
+
         
         const product = await Product.findById(productId)
         if(!product) return res.status(400).json({msg : 'no product with that id'})

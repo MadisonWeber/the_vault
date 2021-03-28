@@ -69,7 +69,7 @@ const cart = () => {
 
             const checkProduct = async (item) => {
                 try {
-                    const { data } = await axios.patch(`${process.env.BASE_URL}api/products`, {
+                    const { data } = await axios.patch(`api/products`, {
                         productId : item._id,
                         quantity : item.quantity
                     },
@@ -98,7 +98,7 @@ const cart = () => {
 
             
             // Post Order to Orders
-           const { data }  = await axios.post(`${process.env.BASE_URL}api/orders`, {
+           const { data }  = await axios.post(`api/orders`, {
                 address : deliverInfo,
                 cart,
                 total : totalPrice.toFixed(2)

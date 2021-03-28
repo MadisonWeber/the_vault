@@ -21,9 +21,6 @@ const GlobalStateProvider = ({children}) => {
     const { cart, user } = state
 
  
-   
-
-
 
     // Handles Persisting of Cart
     useEffect(() => {
@@ -44,13 +41,12 @@ const GlobalStateProvider = ({children}) => {
                 const savedToken = localStorage.getItem('USER_TOKEN')
                 if(!savedToken) return 
 
-                const { data } = await axios.get(`${process.env.BASE_URL}api/auth/refreshUser`, 
+                const { data } = await axios.get(`api/auth/refreshUser`, 
                 { headers : {
                     "authorization" : savedToken}
                 }
                 )  
                 data.token = savedToken
-                console.log('getting user again')
                 dispatch({type : ACTIONS.PERSIST_USER, payload : data})
             }catch(err){
                 console.log('from refetch user', err)
@@ -80,9 +76,8 @@ const GlobalStateProvider = ({children}) => {
         const checkTokens = async () => {
             const savedToken = localStorage.getItem('USER_TOKEN')
             if(!savedToken) return 
-            console.log('refresh stuff running')
             try {
-                const { data } = await axios.get(`${process.env.BASE_URL}api/auth/tokenStatus`, 
+                const { data } = await axios.get(`api/auth/tokenStatus`, 
                 {
                     headers : {
                         "authorization" : savedToken
@@ -112,7 +107,7 @@ const GlobalStateProvider = ({children}) => {
                 // Token nearly expired.. fetch and store a new one
                 if(error.response.status === 401 && error.response.data.msg === 'token needed'){
                     try {
-                        const { data } = await axios.get(`${process.env.BASE_URL}api/auth/refetchTokens`)
+                        const { data } = await axios.get(`api/auth/refetchTokens`)
                         localStorage.removeItem('USER_TOKEN')
                         localStorage.setItem('USER_TOKEN', data.token)
                         dispatch({type : ACTIONS.NEW_TOKEN, payload : data.token})
