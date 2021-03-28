@@ -5,7 +5,7 @@ const fetcher = (url) => axios.get(url).then(data => data.data)
 
 export const getProducts = () => {
 
-    const {data, error} = useSWR(`${process.env.BASE_URL}api/products`, fetcher)
+    const {data, error} = useSWR(`api/products`, fetcher)
    
     return {
         data: data,
