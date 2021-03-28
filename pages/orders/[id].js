@@ -52,7 +52,7 @@ export default confirmOrder
 export const getServerSideProps = async ({params}) => {
 
     const { id } = params
-    const { data } = await axios.get(`http://localhost:3000/api/orders/${id}`)
+    const { data } = await axios.get(`${process.env.BASE_URL}api/orders/${id}`)
 
     return { 
         props: {

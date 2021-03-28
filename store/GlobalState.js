@@ -44,7 +44,7 @@ const GlobalStateProvider = ({children}) => {
                 const savedToken = localStorage.getItem('USER_TOKEN')
                 if(!savedToken) return 
 
-                const { data } = await axios.get("http://localhost:3000/api/auth/refreshUser", 
+                const { data } = await axios.get(`${process.env.BASE_URL}api/auth/refreshUser`, 
                 { headers : {
                     "authorization" : savedToken}
                 }
@@ -82,7 +82,7 @@ const GlobalStateProvider = ({children}) => {
             if(!savedToken) return 
             console.log('refresh stuff running')
             try {
-                const { data } = await axios.get('http://localhost:3000/api/auth/tokenStatus', 
+                const { data } = await axios.get(`${process.env.BASE_URL}api/auth/tokenStatus`, 
                 {
                     headers : {
                         "authorization" : savedToken
@@ -112,7 +112,7 @@ const GlobalStateProvider = ({children}) => {
                 // Token nearly expired.. fetch and store a new one
                 if(error.response.status === 401 && error.response.data.msg === 'token needed'){
                     try {
-                        const { data } = await axios.get('http://localhost:3000/api/auth/refetchTokens')
+                        const { data } = await axios.get(`${process.env.BASE_URL}api/auth/refetchTokens`)
                         localStorage.removeItem('USER_TOKEN')
                         localStorage.setItem('USER_TOKEN', data.token)
                         dispatch({type : ACTIONS.NEW_TOKEN, payload : data.token})

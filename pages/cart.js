@@ -69,7 +69,7 @@ const cart = () => {
 
             const checkProduct = async (item) => {
                 try {
-                    const { data } = await axios.patch('http://localhost:3000/api/products', {
+                    const { data } = await axios.patch(`${process.env.BASE_URL}api/products`, {
                         productId : item._id,
                         quantity : item.quantity
                     },
@@ -91,14 +91,14 @@ const cart = () => {
             
             if(!allGood){
                 let filtered = checkQuantity.filter( prod => prod !== true)
-                console.log('filtered is ', filtered[0])
+            
                 setLoading(false)
                 return dispatch({type : ACTIONS.UPDATE_MESSAGE, payload : { text : filtered[0], category : 'error'}})
             } 
 
             
             // Post Order to Orders
-           const { data }  = await axios.post('http://localhost:3000/api/orders', {
+           const { data }  = await axios.post(`${process.env.BASE_URL}api/orders`, {
                 address : deliverInfo,
                 cart,
                 total : totalPrice.toFixed(2)
@@ -125,7 +125,7 @@ const cart = () => {
 
     if(!user.name){
         return (
-            <Layout>
+            <Layout description = 'The Vault user cart'>
                 <div className = {styles.cart}>
                     <h2>Your Cart</h2>
                     <div className = {styles.noUser}>
@@ -138,7 +138,7 @@ const cart = () => {
 
     if(user.name && Object.keys(cart).length < 1){
         return(
-        <Layout>
+        <Layout description = 'The Vault user cart'>
             <div className = {styles.cart}>
                 <h2>Your Cart</h2>
                 <div className = {styles.noUser}>
@@ -152,7 +152,7 @@ const cart = () => {
    
 
     return (
-        <Layout description = 'the vault user cart'>
+        <Layout description = 'The Vault user cart'>
             <div className = {styles.cart}>
                 <h2>Your Cart</h2>
                 <div className = {styles.cart__inner}>

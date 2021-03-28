@@ -31,7 +31,7 @@ const Register = () => {
             return dispatch({ type : ACTIONS.UPDATE_MESSAGE, payload : { category : 'error', text : errorMsg}})
         }  
         try {
-            const { data } = await axios.post("http://localhost:3000/api/auth/register", {   
+            const { data } = await axios.post(`${process.env.BASE_URL}api/auth/register`, {   
                 name,
                 email, 
                 password,
