@@ -5,7 +5,8 @@ import { GlobalState } from '../../store/GlobalState'
 import Link from 'next/link'
 import ACTIONS from '../../store/actions'
 import styles from "../../styles/confirmOrder.module.scss"
-import sendEmail from '../../utils/email'
+import Orders from "../../models/order.model"
+
 
 
 
@@ -52,7 +53,8 @@ export default confirmOrder
 export const getServerSideProps = async ({params}) => {
 
     const { id } = params
-    const { data } = await axios.get(`api/orders/${id}`)
+    // const { data } = await axios.get(`api/orders/${id}`)
+    const data = await Orders.findById(id)
 
     return { 
         props: {
