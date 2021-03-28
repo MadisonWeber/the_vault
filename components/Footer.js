@@ -3,7 +3,7 @@ import { GlobalState } from '../store/GlobalState'
 import ACTIONS from '../store/actions'
 import emailSelf from '../utils/emailself'
 import styles from '../styles/footer.module.scss'
-import { init } from 'emailjs-com'
+
 
 const Footer = () => {
 

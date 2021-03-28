@@ -1,5 +1,6 @@
 import Layout from '../../../components/Layout'
-import axios from 'axios'
+import Orders from "../../../models/order.model"
+// import axios from 'axios'
 import styles from '../../../styles/orderhistory.module.scss'
 import { useContext } from 'react'
 import { GlobalState } from '../../../store/GlobalState'
@@ -10,8 +11,6 @@ const orderhistory = ({data}) => {
 
     const { state } = useContext( GlobalState )
     const { user } = state
-
-    // console.log('data is ', data)
 
 
 
@@ -72,7 +71,8 @@ export default orderhistory
 export const getServerSideProps = async (ctx) => {
 
     const { id } = ctx.params
-    const { data }  = await axios.get(`api/orders/orderhistory/${id}`)
+    // const { data }  = await axios.get(`api/orders/orderhistory/${id}`)
+    const data = await Orders.find({ _id : id})
 
     return {
         props : {
